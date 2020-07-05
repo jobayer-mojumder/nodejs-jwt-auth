@@ -14,24 +14,24 @@ var userController = {
             if (!results) {
                 return res.status(401).json({
                     success: 0,
-                    message: "No user found"
+                    message: 'No user found'
                 });
             }
             const result = compareSync(body.password, results.password);
             if (result) {
                 results.password = undefined;
                 const jsontoken = sign({ result: results }, process.env.JWT_KEY, {
-                    expiresIn: "1h"
+                    expiresIn: '1h'
                 });
                 return res.status(200).json({
                     success: 1,
-                    message: "login successfully",
+                    message: 'login successfully',
                     token: jsontoken
                 });
             } else {
                 return res.status(401).json({
                     success: 0,
-                    message: "Invalid password"
+                    message: 'Invalid password'
                 });
             }
         });
@@ -64,7 +64,7 @@ var userController = {
             if (!results) {
                 return res.json({
                     success: 0,
-                    message: "Record not Found"
+                    message: 'Record not Found'
                 });
             }
             results.password = undefined;
@@ -88,7 +88,7 @@ var userController = {
             }
             return res.json({
                 success: 1,
-                message: "updated successfully"
+                message: 'updated successfully'
             });
         });
     },
@@ -105,12 +105,12 @@ var userController = {
             if (!results) {
                 return res.json({
                     success: 0,
-                    message: "Record Not Found"
+                    message: 'Record Not Found'
                 });
             }
             return res.json({
                 success: 1,
-                message: "user deleted successfully"
+                message: 'user deleted successfully'
             });
         });
     },
