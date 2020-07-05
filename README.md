@@ -20,6 +20,8 @@ create .env file and copy all the configuration from .env.example. After that co
 
     $ cp .env.example .env
 
+Import table.sql to your mysql database.
+
 ## Running the project
 
     $ npm start
