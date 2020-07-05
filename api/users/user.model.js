@@ -2,15 +2,15 @@ const pool = require('../../config/database')
 
 var userModel = {
 
-    create: (data, callBack) => {
+    create: (userData, callBack) => {
         pool.query(
             `insert into users(firstName, lastName, email, password) 
-                  values(?,?,?,?,?,?)`,
+                  values(?,?,?,?)`,
             [
-                data.first_name,
-                data.last_name,
-                data.email,
-                data.password
+                userData.first_name,
+                userData.last_name,
+                userData.email,
+                userData.password
             ],
             (error, results, fields) => {
                 return callBack(error, results);
@@ -60,15 +60,15 @@ var userModel = {
     },
 
 
-    updateUser: (data, callBack) => {
+    updateUser: (userData, callBack) => {
         pool.query(
             `update users set firstName=?, lastName=?, email=?, password=? where id = ?`,
             [
-                data.first_name,
-                data.last_name,
-                data.email,
-                data.password,
-                data.id
+                userData.first_name,
+                userData.last_name,
+                userData.email,
+                userData.password,
+                userData.id
             ],
             (error, results, fields) => {
                 if (error) {
@@ -80,10 +80,10 @@ var userModel = {
     },
 
 
-    deleteUser: (data, callBack) => {
+    deleteUser: (userData, callBack) => {
         pool.query(
             `delete from users where id = ?`,
-            [data.id],
+            [userData.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
