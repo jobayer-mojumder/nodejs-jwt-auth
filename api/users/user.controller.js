@@ -38,6 +38,7 @@ var userController = {
     },
 
 
+
     getUsers: (req, res) => {
         UserModel.getUsers((err, results) => {
             if (err) {
@@ -50,6 +51,7 @@ var userController = {
             });
         });
     },
+
 
 
     getUserByUserId: (req, res) => {
@@ -112,6 +114,7 @@ var userController = {
             });
         });
     },
+
 
 
     createUser: (req, res) => {

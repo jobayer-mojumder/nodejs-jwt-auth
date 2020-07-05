@@ -1,17 +1,16 @@
 const pool = require("../../config/database")
 
 var userModel = {
+
     create: (data, callBack) => {
         pool.query(
-            `insert into users(firstName, lastName, gender, email, password, number) 
+            `insert into users(firstName, lastName, email, password) 
                   values(?,?,?,?,?,?)`,
             [
                 data.first_name,
                 data.last_name,
-                data.gender,
                 data.email,
-                data.password,
-                data.number
+                data.password
             ],
             (error, results, fields) => {
                 return callBack(error, results);
@@ -19,6 +18,8 @@ var userModel = {
         );
 
     },
+
+
     getUserByUserEmail: (email, callBack) => {
         pool.query(`select * from users where email = ?`, [email],
             (error, results, fields) => {
@@ -29,9 +30,11 @@ var userModel = {
             }
         );
     },
+
+
     getUserByUserId: (id, callBack) => {
         pool.query(
-            `select id,firstName,lastName,gender,email,number from users where id = ?`,
+            `select id,firstName,lastName,email from users where id = ?`,
             [id],
             (error, results, fields) => {
                 if (error) {
@@ -41,9 +44,11 @@ var userModel = {
             }
         );
     },
+
+
     getUsers: callBack => {
         pool.query(
-            `select id,firstName,lastName,gender,email,number from users`,
+            `select id,firstName,lastName,email from users`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -53,16 +58,16 @@ var userModel = {
             }
         );
     },
+
+
     updateUser: (data, callBack) => {
         pool.query(
-            `update users set firstName=?, lastName=?, gender=?, email=?, password=?, number=? where id = ?`,
+            `update users set firstName=?, lastName=?, email=?, password=? where id = ?`,
             [
                 data.first_name,
                 data.last_name,
-                data.gender,
                 data.email,
                 data.password,
-                data.number,
                 data.id
             ],
             (error, results, fields) => {
@@ -73,6 +78,8 @@ var userModel = {
             }
         );
     },
+
+
     deleteUser: (data, callBack) => {
         pool.query(
             `delete from users where id = ?`,
