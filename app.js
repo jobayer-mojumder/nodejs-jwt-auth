@@ -1,9 +1,14 @@
 require('dotenv').config()
 const express = require('express');
+const cors = require('cors')
+const bodyParser = require('body-parser')
 const app = express();
 const userRouter = require('./api/users/user.router')
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
     console.log('Welcome to the application')

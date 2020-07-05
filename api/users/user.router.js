@@ -2,11 +2,11 @@ const router = require("express").Router()
 const validation = require('../auth/validation')
 const userController = require("./user.controller")
 
-router.post("/login", login)
-router.get("/", validation, getUsers)
-router.post("/", validation, createUser)
-router.get("/:id", validation, getUserByUserId)
-router.patch("/", validation, updateUsers)
-router.delete("/", validation, deleteUser)
+router.post("/login", userController.login)
+router.get("/", validation, userController.getUsers)
+router.post("/", validation, userController.createUser)
+router.get("/:id", validation, userController.getUserByUserId)
+router.put("/", validation, userController.updateUsers)
+router.delete("/", validation, userController.deleteUser)
 
 module.exports = router;
