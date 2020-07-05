@@ -14,17 +14,13 @@ var userModel = {
                 data.number
             ],
             (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
-                return callBack(null, results);
+                return callBack(error, results);
             }
         );
+
     },
     getUserByUserEmail: (email, callBack) => {
-        pool.query(
-            `select * from users where email = ?`,
-            [email],
+        pool.query(`select * from users where email = ?`, [email],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

@@ -9,7 +9,7 @@ var validation = (req, res, next) => {
         jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
             if (err) {
                 return res.status(400).json({
-                    success: 400,
+                    success: 401,
                     message: "Invalid Token..."
                 });
             } else {
@@ -19,7 +19,7 @@ var validation = (req, res, next) => {
         });
     } else {
         return res.status(400).json({
-            success: 401,
+            success: 400,
             message: "Access Denied! Unauthorized User"
         });
     }
