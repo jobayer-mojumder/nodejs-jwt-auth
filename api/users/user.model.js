@@ -81,7 +81,8 @@ var userModel = {
                 if (error) {
                     callBack(error);
                 }
-                return callBack(null, results[0]);
+                console.log(results);
+                return callBack(null, results[1]);
             }
         );
     }

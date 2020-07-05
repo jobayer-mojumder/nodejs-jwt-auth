@@ -3,6 +3,7 @@ const { hashSync, genSaltSync, compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
 var userController = {
+
     login: (req, res) => {
         const body = req.body;
         UserModel.getUserByUserEmail(body.email, (err, results) => {
@@ -19,7 +20,7 @@ var userController = {
             const result = compareSync(body.password, results.password);
             if (result) {
                 results.password = undefined;
-                const jsontoken = sign({ result: results }, "qwe1234", {
+                const jsontoken = sign({ result: results }, process.env.JWT_KEY, {
                     expiresIn: "1h"
                 });
                 return res.status(200).json({
@@ -35,6 +36,8 @@ var userController = {
             }
         });
     },
+
+
     getUsers: (req, res) => {
         UserModel.getUsers((err, results) => {
             if (err) {
@@ -47,21 +50,69 @@ var userController = {
             });
         });
     },
+
+
     getUserByUserId: (req, res) => {
-        return res.status(200).json({
-            message: 'Welcome'
+        const id = req.params.id;
+        getUserByUserId(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    message: "Record not Found"
+                });
+            }
+            results.password = undefined;
+            return res.json({
+                success: 1,
+                data: results
+            });
         });
     },
+
+
+
     updateUsers: (req, res) => {
-        return res.status(200).json({
-            message: 'Welcome'
+        const body = req.body;
+        const salt = genSaltSync(10);
+        body.password = hashSync(body.password, salt);
+        UserModel.updateUser(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                message: "updated successfully"
+            });
         });
     },
+
+
+
     deleteUser: (req, res) => {
-        return res.status(200).json({
-            message: 'Welcome'
+        const data = req.body;
+        UserModel.deleteUser(data, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    message: "Record Not Found"
+                });
+            }
+            return res.json({
+                success: 1,
+                message: "user deleted successfully"
+            });
         });
     },
+
 
     createUser: (req, res) => {
         const body = req.body;
