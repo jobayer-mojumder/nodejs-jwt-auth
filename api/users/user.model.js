@@ -82,7 +82,7 @@ var userModel = {
                     callBack(error);
                 }
                 console.log(results);
-                return callBack(null, results[1]);
+                return callBack(null, results.affectedRows);
             }
         );
     }
