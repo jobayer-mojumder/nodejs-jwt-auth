@@ -10,10 +10,14 @@ var userController = {
 
             if (err) {
                 console.log(err);
+                return res.status(500).json({
+                    status: 500,
+                    message: err.message
+                });
             }
             if (!results) {
                 return res.status(401).json({
-                    success: 0,
+                    status: 401,
                     message: 'No user found'
                 });
             }
@@ -24,13 +28,13 @@ var userController = {
                     expiresIn: '1h'
                 });
                 return res.status(200).json({
-                    success: 1,
+                    status: 200,
                     message: 'login successfully',
                     token: jsontoken
                 });
             } else {
                 return res.status(401).json({
-                    success: 0,
+                    status: 401,
                     message: 'Invalid password'
                 });
             }
@@ -43,10 +47,13 @@ var userController = {
         UserModel.getUsers((err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    status: 500,
+                    message: err.message
+                });
             }
             return res.json({
-                success: 1,
+                status: 200,
                 data: results
             });
         });
@@ -59,17 +66,20 @@ var userController = {
         getUserByUserId(id, (err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    status: 500,
+                    message: err.message
+                });
             }
             if (!results) {
-                return res.json({
-                    success: 0,
+                return res.status(404).json({
+                    status: 404,
                     message: 'Record not Found'
                 });
             }
             results.password = undefined;
-            return res.json({
-                success: 1,
+            return res.status(200).json({
+                status: 200,
                 data: results
             });
         });
@@ -84,11 +94,14 @@ var userController = {
         UserModel.updateUser(body, (err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    status: 500,
+                    message: err.message
+                });
             }
-            return res.json({
-                success: 1,
-                message: 'updated successfully'
+            return res.status(200).json({
+                status: 200,
+                message: 'updated statusfully'
             });
         });
     },
@@ -100,17 +113,20 @@ var userController = {
         UserModel.deleteUser(data, (err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    status: 500,
+                    message: err.message
+                });
             }
             if (!results) {
-                return res.json({
-                    success: 0,
+                return res.status(404).json({
+                    status: 404,
                     message: 'Record Not Found'
                 });
             }
-            return res.json({
-                success: 1,
-                message: 'user deleted successfully'
+            return res.status(200).json({
+                status: 200,
+                message: 'user deleted statusfully'
             });
         });
     },
@@ -125,12 +141,12 @@ var userController = {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
-                    success: 0,
+                    status: 500,
                     message: err.message
                 });
             }
-            return res.status(200).json({
-                success: 1,
+            return res.status(201).json({
+                status: 201,
                 data: results
             });
         });

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 
-var validation = (req, res, next) => {
+var checkToken = (req, res, next) => {
     let token = req.get("authorization");
     if (token) {
         // Remove Bearer from string
@@ -24,4 +24,4 @@ var validation = (req, res, next) => {
         });
     }
 }
-module.exports = validation
+module.exports = checkToken
