@@ -1,7 +1,6 @@
 # nodejs-jwt-auth
 A fully functional rest api in node js and mysql with jwt authentication .
 
-
 ---
 ## Requirements
 
