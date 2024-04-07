@@ -4,7 +4,7 @@ A fully functional rest api in node js and mysql with jwt authentication .
 ---
 ## Requirements
 
-For development, you will only need Node.js and a node global package, npm, installed in your environement.
+For development, you will only need Node.js and a node global package, npm, installed in your environment.
 
 
 ## Install
